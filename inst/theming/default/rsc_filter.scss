@@ -1,0 +1,97 @@
+@import '../contrast.scss';
+
+$lightContrast: contrast($body-bg, white);
+$darkContrast: contrast($body-bg, black);
+
+.rscfilter {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+
+  &__toggle {
+    @if ($lightContrast > $darkContrast) {
+      color: white;
+    }
+  }
+
+  &__toggle::after {
+    @if ($lightContrast > $darkContrast) {
+      background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iNSIgdmlld0JveD0iMCAwIDEwIDUiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0wIC00LjM3MTE0ZS0wN0w1IDVMMTAgMEwwIC00LjM3MTE0ZS0wN1oiIGZpbGw9IiNGRkZGRkYiLz4KPC9zdmc+");
+    }
+  }
+
+  &__count {
+    background: $primary;
+    color: $white;
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 0.84em;
+    font-weight: 700;
+    line-height: 1.72em;
+    text-align: center;
+    min-width: 2em;
+  }
+}
+
+.rscfilter-field {
+  &__input {
+    border: 1px solid $gray-500;
+
+    &:focus {
+      border-color: $primary;
+    }
+  }
+
+  &__options {
+    background:$white;
+    border: 1px solid $gray-500;
+  }
+}
+
+.rscfilter-pane {
+  background: $white;
+  color: $gray-700;
+
+  &::before {
+    background: $white;
+  }
+  
+  &::after {
+    background: $white;
+  }
+  
+  &__actions {
+    border-top: 2px solid $gray-200;
+
+    &-reset {
+      background: $gray-200;
+      border: none;
+      border-radius: 3px;
+      line-height: 36px;
+      padding: 0 16px;
+    }
+  }  
+}
+
+.rscfilter-option {
+  &__checkbox {
+    border: 1px solid $gray-500;
+  }
+
+  &:focus &__checkbox {
+    border: 2px solid $primary;
+  }
+}
+
+.rscfilter-selections {
+  &__item {
+    background: $gray-200;
+    border-radius: 0.86em;
+    color: $gray-700;
+    display: flex;
+    font-size: 0.86em;
+    height: 1.72em;
+    line-height: 1.72em;
+    margin: 0 0.4em 0.4em 0;;
+    padding: 0 0.86em;
+  }
+}
