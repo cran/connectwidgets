@@ -1,3 +1,9 @@
+# connectwidgets 0.2.0
+
+* Add support for htmlwidgets 1.6 (#79)
+* Warn rather than err when the server version is not available. (#63)
+* Update company and product name for rebranding to Posit (#76)
+
 # connectwidgets 0.1.1
 
 * Initial public release and CRAN submission of the {connectwidgets} R package

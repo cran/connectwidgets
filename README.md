@@ -3,7 +3,7 @@
 
 # connectwidgets <a href='https://rstudio.github.io/connectwidgets/'><img src='man/figures/logo.png' align="right" height="138" /></a>
 
-Curate your content on RStudio Connect
+Curate your content on Posit Connect
 
 <!-- badges: start -->
 
@@ -15,14 +15,24 @@ stable](https://img.shields.io/badge/lifecycle-stable-green)](https://lifecycle.
 [![lint](https://github.com/rstudio/connectwidgets/actions/workflows/lint.yaml/badge.svg)](https://github.com/rstudio/connectwidgets/actions/workflows/lint.yaml)
 <!-- badges: end -->
 
-`connectwidgets` is an R package that can be used to query an RStudio Connect server for a subset of your existing content items, then organize them within `htmlwidget` components in an R Markdown document or Shiny application.
+`connectwidgets` is an R package that can be used to query a Posit
+Connect server for a subset of your existing content items, then
+organize them within `htmlwidget` components in an R Markdown document
+or Shiny application.
 
-Use `connectwidgets` to create a content hub or knowledge repository, a customized summary page for a particular group of stakeholders, or a presentation layer for any group of related content. 
+Use `connectwidgets` to create a content hub or knowledge repository, a
+customized summary page for a particular group of stakeholders, or a
+presentation layer for any group of related content.
 
 ## Installation
 
-This package has not been released to CRAN yet and must be installed
-from GitHub:
+You can install `connectwidgets` from CRAN using:
+
+``` r
+install.packages("connectwidgets")
+```
+
+Alternatively, you can install the development version from GitHub:
 
 ``` r
 # install.packages("remotes")
@@ -103,15 +113,15 @@ rsc_table(all_content)
 
 The client object:
 
--   Validates your API key with the RStudio Connect server
+-   Validates your API key with the Posit Connect server
 -   Ensures you are running a recent enough version of Connect
 
 Use an `.Renviron` file to set the `CONNECT_SERVER` and
 `CONNECT_API_KEY` environment variables. If you’re not familiar with
 setting environment variables, check out the [R Startup
 chapter](https://rstats.wtf/r-startup.html#renviron) of What They Forgot
-to Teach You About R. RStudio Connect will [automatically
-apply](https://docs.rstudio.com/connect/user/content-settings/#content-vars)
+to Teach You About R. Posit Connect will [automatically
+apply](https://docs.posit.co/connect/user/content-settings/#content-vars)
 values for these at document run time, so there is no need to include
 them in your code:
 
@@ -130,23 +140,23 @@ all_content <- client %>%
   content()
 
 glimpse(all_content)
-#> Rows: 1,203
+#> Rows: 12
 #> Columns: 15
-#> $ id               <int> 3979, 4603, 4602, 5015, 5001, 5034, 1440, 5031, 5022,…
-#> $ guid             <chr> "ca22a1f6-bab5-4fc0-8f38-ed8021be41f5", "e7c26684-ec4…
-#> $ name             <chr> "github-issues-connect", "group-info", "user-info", "…
-#> $ title            <chr> NA, "group-info", "user-info", "RSC+K8S", "New & Nota…
-#> $ description      <chr> "A table pin with 19648 rows and 10 columns.", "Resul…
-#> $ app_mode         <chr> "static", "static", "static", "static", "rmd-static",…
-#> $ content_category <chr> "pin", "pin", "pin", "site", "", "", "", "", "", "", …
-#> $ url              <chr> "https://rsc.radixu.com/content/ca22a1f6-bab5-4fc0-8f…
-#> $ owner_guid       <chr> "1d6cc041-eb11-411e-810e-718508cde25b", "0fc96747-ec9…
-#> $ owner_username   <chr> "brian", "kelly.obriant", "kelly.obriant", "aron", "k…
-#> $ owner_first_name <chr> "Brian", "Kelly", "Kelly", "Aron", "Kelly", "E. David…
-#> $ owner_last_name  <chr> "Smith", "@RStudio", "@RStudio", "Atkins", "@RStudio"…
-#> $ tags             <list> [<data.frame[2 x 5]>], [<data.frame[1 x 5]>], [<data…
-#> $ created_time     <dttm> 2020-04-03 17:54:27, 2020-12-05 02:37:30, 2020-12-05…
-#> $ updated_time     <dttm> 2021-07-13 07:03:04, 2021-07-13 07:00:47, 2021-07-13…
+#> $ id               <int> 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
+#> $ guid             <chr> "0b7e0b47-a8c7-4492-87ea-7082eb942839", "d0664722-a93…
+#> $ name             <chr> "puser3-acl-static-plot-with-title-and-description", …
+#> $ title            <chr> "Static Plot (Title and Description)", "Static Plot (…
+#> $ description      <chr> "This static plot was deployed with a title and a des…
+#> $ app_mode         <chr> "static", "static", "static", "static", "static", "st…
+#> $ content_category <chr> "plot", "plot", "plot", "plot", "plot", "plot", "plot…
+#> $ url              <chr> "http://localhost:3939/content/0b7e0b47-a8c7-4492-87e…
+#> $ owner_guid       <chr> "504a8529-9a89-4062-8758-a419a490a9a3", "4dfa986f-3e4…
+#> $ owner_username   <chr> "puser3", "puser2", "puser1", "puser3", "puser2", "pu…
+#> $ owner_first_name <chr> "", "", "", "", "", "", "", "", "", "", "", ""
+#> $ owner_last_name  <chr> "", "", "", "", "", "", "", "", "", "", "", ""
+#> $ created_time     <dttm> 2023-01-10 22:37:59, 2023-01-10 22:37:59, 2023-01-10 …
+#> $ updated_time     <dttm> 2023-01-10 22:37:59, 2023-01-10 22:37:59, 2023-01-10 …
+#> $ tags             <list> <NULL>, <NULL>, <NULL>, <NULL>, <NULL>, <NULL>, <NULL…
 
 sample_content <- all_content %>%
   arrange(desc(updated_time)) %>%
@@ -199,18 +209,12 @@ We provide helper functions to filter by both owners and tags.
 ``` r
 all_content %>% 
   by_tag("Audit Reports")
-#> # A tibble: 6 x 15
-#>      id guid  name  title description app_mode content_category url   owner_guid
-#>   <int> <chr> <chr> <chr> <chr>       <chr>    <chr>            <chr> <chr>     
-#> 1  4875 7cbd… Audi… Audi… Using the … rmd-sta… ""               http… 0fc96747-…
-#> 2  4619 b191… tag-… Tag … List all t… rmd-sta… ""               http… 0fc96747-…
-#> 3  4618 4348… acl-… Cont… Generate a… rmd-sta… ""               http… 0fc96747-…
-#> 4  4597 6a8f… cont… Basi… List all c… rmd-sta… ""               http… 0fc96747-…
-#> 5  4596 3f7a… vani… Vani… List all d… rmd-sta… ""               http… 0fc96747-…
-#> 6  4595 5687… envi… R an… R and Pyth… rmd-sta… ""               http… 0fc96747-…
-#> # … with 6 more variables: owner_username <chr>, owner_first_name <chr>,
-#> #   owner_last_name <chr>, tags <list>, created_time <dttm>,
-#> #   updated_time <dttm>
+#> # A tibble: 0 × 15
+#> # … with 15 variables: id <int>, guid <chr>, name <chr>, title <chr>,
+#> #   description <chr>, app_mode <chr>, content_category <chr>, url <chr>,
+#> #   owner_guid <chr>, owner_username <chr>, owner_first_name <chr>,
+#> #   owner_last_name <chr>, created_time <dttm>, updated_time <dttm>,
+#> #   tags <list>
 ```
 
 Since `all_content` is a `tibble()`, you can also manipulate it with
@@ -220,30 +224,33 @@ dplyr:
 all_content %>% 
   filter(updated_time >= "2021-01-01") %>% 
   arrange(created_time)
-#> # A tibble: 67 x 15
-#>       id guid    name    title  description    app_mode content_category url    
-#>    <int> <chr>   <chr>   <chr>  <chr>          <chr>    <chr>            <chr>  
-#>  1  1440 d7bf0e… cs_rep… cs_re… ""             rmd-sta… ""               https:…
-#>  2  1890 be63ca… rmd     rmd4   "This rmd is … rmd-sta… ""               https:…
-#>  3  3724 b5e57e… team-d… Team-… ""             static   ""               https:…
-#>  4  3979 ca22a1… github… <NA>   "A table pin … static   "pin"            https:…
-#>  5  4364 9ffbbd… shiny-… shiny… ""             shiny    ""               https:…
-#>  6  4602 e21598… user-i… user-… "Results pull… static   "pin"            https:…
-#>  7  4603 e7c266… group-… group… "Results pull… static   "pin"            https:…
-#>  8  4630 f12eb8… top-5-… top-5… ""             python-… ""               https:…
-#>  9  4631 68c9b2… top-5-… top-5… ""             python-… ""               https:…
-#> 10  4650 ebdea3… reticu… retic… ""             static   ""               https:…
-#> # … with 57 more rows, and 7 more variables: owner_guid <chr>,
-#> #   owner_username <chr>, owner_first_name <chr>, owner_last_name <chr>,
-#> #   tags <list>, created_time <dttm>, updated_time <dttm>
+#> # A tibble: 12 × 15
+#>       id guid  name  title descr…¹ app_m…² conte…³ url   owner…⁴ owner…⁵ owner…⁶
+#>    <int> <chr> <chr> <chr> <chr>   <chr>   <chr>   <chr> <chr>   <chr>   <chr>  
+#>  1     6 18b2… puse… Stat… ""      static  plot    http… 504a85… puser3  ""     
+#>  2     5 2460… puse… Stat… ""      static  plot    http… 4dfa98… puser2  ""     
+#>  3     4 3de7… puse… Stat… ""      static  plot    http… f6fd68… puser1  ""     
+#>  4     3 7299… puse… <NA>  ""      static  plot    http… 504a85… puser3  ""     
+#>  5     2 edab… puse… <NA>  ""      static  plot    http… 4dfa98… puser2  ""     
+#>  6     1 7ccf… puse… <NA>  ""      static  plot    http… f6fd68… puser1  ""     
+#>  7    12 0b7e… puse… Stat… "This … static  plot    http… 504a85… puser3  ""     
+#>  8    11 d066… puse… Stat… "This … static  plot    http… 4dfa98… puser2  ""     
+#>  9    10 c335… puse… Stat… "This … static  plot    http… f6fd68… puser1  ""     
+#> 10     9 66f2… puse… <NA>  "This … static  plot    http… 504a85… puser3  ""     
+#> 11     8 e7dd… puse… <NA>  "This … static  plot    http… 4dfa98… puser2  ""     
+#> 12     7 5d4e… puse… <NA>  "This … static  plot    http… f6fd68… puser1  ""     
+#> # … with 4 more variables: owner_last_name <chr>, created_time <dttm>,
+#> #   updated_time <dttm>, tags <list>, and abbreviated variable names
+#> #   ¹​description, ²​app_mode, ³​content_category, ⁴​owner_guid, ⁵​owner_username,
+#> #   ⁶​owner_first_name
 ```
 
 ### Components
 
 Once your content data are filtered, `connectwidgets` provides
 components for displaying information about them. The title,
-description, and preview image can be set [from the RStudio Connect
-dashboard.](https://docs.rstudio.com/connect/user/content-settings/#content-metadata)
+description, and preview image can be set [from the Posit Connect
+dashboard.](https://docs.posit.co/connect/user/content-settings/#content-metadata)
 For content deployed to Connect where no image has been supplied, a
 default image will be used.
 
@@ -315,7 +322,7 @@ output:
 ---
 ```
 
-Once you’re happy with the look of your page, Publish it to RStudio
+Once you’re happy with the look of your page, Publish it to Posit
 Connect. Read more at `vignette("publishing")`.
 
 ## A more customized example:
@@ -326,8 +333,8 @@ Putting it all together, the example API portal page below:
 -   uses a Bootswatch theme
 -   overrides the `description` text for a couple of cards
 
-If no APIs are deployed on your RStudio Connect server, try filtering
-for static documents or Shiny apps instead.
+If no APIs are deployed on your Posit Connect server, try filtering for
+static documents or Shiny apps instead.
 
 ```` markdown
 ---
