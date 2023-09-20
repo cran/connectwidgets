@@ -1,10 +1,10 @@
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 
-## ---- eval=FALSE--------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  library(connectwidgets)
 #  library(dplyr)
 #  library(purrr)
@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 #    rsc_table(some_content)
 #  )
 
-## ---- eval=FALSE--------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  some_content_xfilter <- crosstalk::SharedData$new(
 #    some_content,
 #    key = ~ guid,

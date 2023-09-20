@@ -1,6 +1,6 @@
 Package: connectwidgets
 Title: Organize and Curate Your Content Within 'Posit Connect'
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(
     person("Brian", "Smith", email = "brian@rstudio.com", role = c("aut", "cre")),
     person("Marcos", "Navarro", email = "marcos@rstudio.com", role = "aut"),
@@ -15,6 +15,7 @@ Description: A collection of helper functions and 'htmlwidgets' to help publishe
 License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 7.2.3
+Depends: R (>= 3.6.0)
 Suggests: knitr, lintr, rmarkdown, testthat, webmockr, withr
 Imports: R6, httr, jsonlite, tibble, htmlwidgets, reactable, dplyr,
         magrittr, htmltools, glue, rlang, digest, crosstalk, reactR,
@@ -22,8 +23,9 @@ Imports: R6, httr, jsonlite, tibble, htmlwidgets, reactable, dplyr,
 URL: https://rstudio.github.io/connectwidgets/,
         https://github.com/rstudio/connectwidgets
 VignetteBuilder: knitr
+BugReports: https://github.com/rstudio/connectwidgets/issues
 NeedsCompilation: no
-Packaged: 2023-01-10 23:57:00 UTC; bsmith
+Packaged: 2023-09-20 19:29:06 UTC; bsmith
 Author: Brian Smith [aut, cre],
   Marcos Navarro [aut],
   David Aja [ctb],
@@ -31,4 +33,4 @@ Author: Brian Smith [aut, cre],
   Posit [cph]
 Maintainer: Brian Smith <brian@rstudio.com>
 Repository: CRAN
-Date/Publication: 2023-01-11 10:20:15 UTC
+Date/Publication: 2023-09-20 20:30:02 UTC
